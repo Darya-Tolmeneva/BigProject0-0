@@ -5,6 +5,7 @@ import requests
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt5 import uic
+from PyQt5.QtCore import Qt
 
 # SCREEN_SIZE = [600, 450]
 
@@ -30,22 +31,28 @@ class Example(QMainWindow):
             file.write(response.content)
 
     def initUI(self):
+        self.masht = 0.2
+        self.map_file = " "
         self.setWindowTitle('Отображение карты')
         self.pushButton.clicked.connect(self.click)
 
     def click(self):
-        if self.lineEdit.text() and self.lineEdit_2.text() and self.lineEdit_3.text():
+        if self.lineEdit.text() != "" and self.lineEdit_2.text() != "" and self.lineEdit_3.text() != "":
             self.sh = self.lineEdit.text()
             self.dolg = self.lineEdit_2.text()
             self.masht = self.lineEdit_3.text()
             self.getImage()
-        self.pixmap = QPixmap(self.map_file)
-        self.label_4.move(80, 190)
-        self.label_4.setPixmap(self.pixmap)
+            self.pixmap = QPixmap(self.map_file)
+            self.label_4.move(80, 190)
+            self.label_4.setPixmap(self.pixmap)
+        else:
+            pass
+
 
     def closeEvent(self, event):
         """При закрытии формы подчищаем за собой"""
-        os.remove(self.map_file)
+        if self.map_file != " ":
+            os.remove(self.map_file)
 
 
 if __name__ == '__main__':
