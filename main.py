@@ -3,11 +3,8 @@ import sys
 
 import requests
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
+from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic
-from PyQt5.QtCore import Qt
-
-# SCREEN_SIZE = [600, 450]
 
 
 class Example(QMainWindow):
@@ -17,7 +14,7 @@ class Example(QMainWindow):
         self.initUI()
 
     def getImage(self):
-        map_request = f"http://static-maps.yandex.ru/1.x/?ll={self.dolg},{self.sh}&spn={self.masht},{self.masht}&l=map"
+        map_request = f"http://static-maps.yandex.ru/1.x/?ll={self.dolg},{self.sh}&spn={str(self.masht)},{str(self.masht)}&l=map"
         response = requests.get(map_request)
 
         if not response:
@@ -31,20 +28,26 @@ class Example(QMainWindow):
             file.write(response.content)
 
     def initUI(self):
-        self.masht = 0.2
         self.map_file = " "
         self.setWindowTitle('Отображение карты')
         self.pushButton.clicked.connect(self.click)
 
     def click(self):
+        self.label_5.setText("")
         if self.lineEdit.text() != "" and self.lineEdit_2.text() != "" and self.lineEdit_3.text() != "":
             self.sh = self.lineEdit.text()
             self.dolg = self.lineEdit_2.text()
             self.masht = self.lineEdit_3.text()
-            self.getImage()
-            self.pixmap = QPixmap(self.map_file)
-            self.label_4.move(80, 190)
-            self.label_4.setPixmap(self.pixmap)
+            try:
+                self.sh = float(self.sh)
+                self.dolg = float(self.dolg)
+                self.masht = float(self.masht)
+                self.getImage()
+                self.pixmap = QPixmap(self.map_file)
+                self.label_4.move(80, 190)
+                self.label_4.setPixmap(self.pixmap)
+            except ValueError:
+                self.label_5.setText("Неправильные данные")
         else:
             pass
 
