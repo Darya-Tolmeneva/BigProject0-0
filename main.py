@@ -54,7 +54,42 @@ class Example(QMainWindow):
                 self.label_4.setPixmap(self.pixmap)
             except FloatingPointError:
                 pass
-
+        elif k == Qt.Key_I:
+            try:
+                self.sh = float(self.sh) + float(self.masht)
+                self.getImage()
+                self.pixmap = QPixmap(self.map_file)
+                self.label_4.move(80, 190)
+                self.label_4.setPixmap(self.pixmap)
+            except FloatingPointError:
+                pass
+        elif k == Qt.Key_M:
+            try:
+                self.sh = float(self.sh) - float(self.masht)
+                self.getImage()
+                self.pixmap = QPixmap(self.map_file)
+                self.label_4.move(80, 190)
+                self.label_4.setPixmap(self.pixmap)
+            except FloatingPointError:
+                pass
+        elif k == Qt.Key_J:
+            try:
+                self.dolg = float(self.dolg) - float(self.masht)
+                self.getImage()
+                self.pixmap = QPixmap(self.map_file)
+                self.label_4.move(80, 190)
+                self.label_4.setPixmap(self.pixmap)
+            except FloatingPointError:
+                pass
+        elif k == Qt.Key_K:
+            try:
+                self.dolg = float(self.dolg) + float(self.masht)
+                self.getImage()
+                self.pixmap = QPixmap(self.map_file)
+                self.label_4.move(80, 190)
+                self.label_4.setPixmap(self.pixmap)
+            except FloatingPointError:
+                pass
 
     def click(self):
         self.label_5.setText("")
