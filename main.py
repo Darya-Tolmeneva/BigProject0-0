@@ -5,6 +5,7 @@ import requests
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic
+from PyQt5.QtCore import Qt
 
 
 class Example(QMainWindow):
@@ -21,7 +22,7 @@ class Example(QMainWindow):
             print("Ошибка выполнения запроса:")
             print(map_request)
             print("Http статус:", response.status_code, "(", response.reason, ")")
-            sys.exit(1)
+            self.label_5.setText("Неправильные данные")
 
         self.map_file = "map.png"
         with open(self.map_file, "wb") as file:
@@ -31,6 +32,29 @@ class Example(QMainWindow):
         self.map_file = " "
         self.setWindowTitle('Отображение карты')
         self.pushButton.clicked.connect(self.click)
+
+
+    def keyPressEvent(self, ev):
+        k = ev.key()
+        if k == Qt.Key_U:
+            try:
+                self.masht = float(self.masht) + 0.1
+                self.getImage()
+                self.pixmap = QPixmap(self.map_file)
+                self.label_4.move(80, 190)
+                self.label_4.setPixmap(self.pixmap)
+            except FloatingPointError:
+                pass
+        elif k == Qt.Key_D:
+            try:
+                self.masht = float(self.masht) - 0.1
+                self.getImage()
+                self.pixmap = QPixmap(self.map_file)
+                self.label_4.move(80, 190)
+                self.label_4.setPixmap(self.pixmap)
+            except FloatingPointError:
+                pass
+
 
     def click(self):
         self.label_5.setText("")
