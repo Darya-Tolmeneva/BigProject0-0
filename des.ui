@@ -56,24 +56,11 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>80</y>
-      <width>181</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Построить</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>190</y>
+      <y>200</y>
       <width>731</width>
       <height>591</height>
      </rect>
@@ -82,18 +69,63 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>120</y>
-      <width>171</width>
-      <height>20</height>
+      <x>340</x>
+      <y>20</y>
+      <width>401</width>
+      <height>151</height>
      </rect>
     </property>
-    <property name="text">
-     <string/>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Вид</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QRadioButton" name="radioButton">
+         <property name="text">
+          <string>схема</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="radioButton_2">
+         <property name="text">
+          <string>спутник</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="radioButton_3">
+         <property name="text">
+          <string>гибрид</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>Построить</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

@@ -15,14 +15,15 @@ class Example(QMainWindow):
         self.initUI()
 
     def getImage(self):
-        map_request = f"http://static-maps.yandex.ru/1.x/?ll={self.dolg},{self.sh}&spn={str(self.masht)},{str(self.masht)}&l=map"
+        self.label_5.setText("")
+        map_request = f"http://static-maps.yandex.ru/1.x/?ll={self.dolg},{self.sh}&spn={str(self.masht)},{str(self.masht)}&l={self.map}"
         response = requests.get(map_request)
 
         if not response:
             print("Ошибка выполнения запроса:")
             print(map_request)
             print("Http статус:", response.status_code, "(", response.reason, ")")
-            self.label_5.setText("Неправильные данные")
+            self.label_5.setText("Ой, проверьте данные")
 
         self.map_file = "map.png"
         with open(self.map_file, "wb") as file:
@@ -30,8 +31,12 @@ class Example(QMainWindow):
 
     def initUI(self):
         self.map_file = " "
+        self.map = "-"
         self.setWindowTitle('Отображение карты')
         self.pushButton.clicked.connect(self.click)
+        self.radioButton.toggled.connect(self.onClicked)
+        self.radioButton_2.toggled.connect(self.onClicked)
+        self.radioButton_3.toggled.connect(self.onClicked)
 
 
     def keyPressEvent(self, ev):
@@ -43,6 +48,7 @@ class Example(QMainWindow):
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
+                self.lineEdit_3.setText(str(self.masht))
             except FloatingPointError:
                 pass
         elif k == Qt.Key_D:
@@ -52,6 +58,7 @@ class Example(QMainWindow):
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
+                self.lineEdit_3.setText(str(self.masht))
             except FloatingPointError:
                 pass
         elif k == Qt.Key_I:
@@ -61,6 +68,7 @@ class Example(QMainWindow):
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
+                self.lineEdit.setText(str(self.sh))
             except FloatingPointError:
                 pass
         elif k == Qt.Key_M:
@@ -70,6 +78,7 @@ class Example(QMainWindow):
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
+                self.lineEdit.setText(str(self.sh))
             except FloatingPointError:
                 pass
         elif k == Qt.Key_J:
@@ -79,6 +88,7 @@ class Example(QMainWindow):
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
+                self.lineEdit_2.setText(str(self.dolg))
             except FloatingPointError:
                 pass
         elif k == Qt.Key_K:
@@ -88,6 +98,7 @@ class Example(QMainWindow):
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
+                self.lineEdit_2.setText(str(self.dolg))
             except FloatingPointError:
                 pass
 
@@ -106,9 +117,19 @@ class Example(QMainWindow):
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
             except ValueError:
-                self.label_5.setText("Неправильные данные")
+                self.label_5.setText("Ой, проверьте данные")
         else:
             pass
+
+    def onClicked(self):
+        radioButton = self.sender()
+        if radioButton.isChecked():
+            if radioButton.text() == "схема":
+                self.map = "map"
+            elif radioButton.text() == "спутник":
+                self.map = "sat"
+            elif radioButton.text() == "гибрид":
+                self.map = "skl"
 
 
     def closeEvent(self, event):
