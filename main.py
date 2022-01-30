@@ -33,7 +33,6 @@ class Example(QMainWindow):
         self.setWindowTitle('Отображение карты')
         self.pushButton.clicked.connect(self.click)
 
-
     def keyPressEvent(self, ev):
         k = ev.key()
         if k == Qt.Key_U:
@@ -43,6 +42,7 @@ class Example(QMainWindow):
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
+                self.lineEdit_3.setText(str(self.masht))
             except FloatingPointError:
                 pass
         elif k == Qt.Key_D:
@@ -52,6 +52,7 @@ class Example(QMainWindow):
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
+                self.lineEdit_3.setText(str(self.masht))
             except FloatingPointError:
                 pass
         elif k == Qt.Key_I:
@@ -61,6 +62,7 @@ class Example(QMainWindow):
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
+                self.lineEdit.setText(str(self.sh))
             except FloatingPointError:
                 pass
         elif k == Qt.Key_M:
@@ -70,6 +72,7 @@ class Example(QMainWindow):
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
+                self.lineEdit.setText(str(self.sh))
             except FloatingPointError:
                 pass
         elif k == Qt.Key_J:
@@ -79,6 +82,7 @@ class Example(QMainWindow):
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
+                self.lineEdit_2.setText(str(self.dolg))
             except FloatingPointError:
                 pass
         elif k == Qt.Key_K:
@@ -88,6 +92,7 @@ class Example(QMainWindow):
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
+                self.lineEdit_2.setText(str(self.dolg))
             except FloatingPointError:
                 pass
 
