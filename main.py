@@ -129,7 +129,7 @@ class Example(QMainWindow):
             elif radioButton.text() == "спутник":
                 self.map = "sat"
             elif radioButton.text() == "гибрид":
-                self.map = "skl"
+                self.map = "sat,skl"
 
 
     def closeEvent(self, event):
