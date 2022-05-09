@@ -20,7 +20,6 @@ class Example(QMainWindow):
             map_request = f"http://static-maps.yandex.ru/1.x/?ll={self.dolg},{self.sh}&spn={str(self.masht)},{str(self.masht)}&l={self.map}"
         else:
             map_request = f"http://static-maps.yandex.ru/1.x/?ll={self.dolg},{self.sh}&spn={str(self.masht)},{str(self.masht)}&l={self.map}&pt={self.need_point[0]},{self.need_point[1]},pmwtm1"
-            self.need_point = False
         response = requests.get(map_request)
 
         if not response:
@@ -148,6 +147,7 @@ class Example(QMainWindow):
             self.sh = self.lineEdit.text()
             self.dolg = self.lineEdit_2.text()
             self.masht = self.lineEdit_3.text()
+            self.need_point = False
             try:
                 self.sh = float(self.sh)
                 self.dolg = float(self.dolg)
