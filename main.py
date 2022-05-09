@@ -38,27 +38,25 @@ class Example(QMainWindow):
         self.radioButton_2.toggled.connect(self.onClicked)
         self.radioButton_3.toggled.connect(self.onClicked)
 
-
     def keyPressEvent(self, ev):
         k = ev.key()
-        if k == Qt.Key_U:
+        if k == Qt.Key_PageDown:
             try:
-                self.masht = float(self.masht) + 0.1
+
+                self.masht = float(self.masht) + (float(self.masht) * 0.5)
                 self.getImage()
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
-                self.lineEdit_3.setText(str(self.masht))
             except FloatingPointError:
                 pass
-        elif k == Qt.Key_D:
+        elif k == Qt.Key_PageUp:
             try:
-                self.masht = float(self.masht) - 0.1
+                self.masht = float(self.masht) - (float(self.masht) * 0.5)
                 self.getImage()
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
                 self.label_4.setPixmap(self.pixmap)
-                self.lineEdit_3.setText(str(self.masht))
             except FloatingPointError:
                 pass
         elif k == Qt.Key_I:
@@ -130,7 +128,6 @@ class Example(QMainWindow):
                 self.map = "sat"
             elif radioButton.text() == "гибрид":
                 self.map = "sat,skl"
-
 
     def closeEvent(self, event):
         """При закрытии формы подчищаем за собой"""
