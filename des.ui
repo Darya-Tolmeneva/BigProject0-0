@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>900</height>
+    <height>890</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -132,7 +132,7 @@
      <rect>
       <x>10</x>
       <y>801</y>
-      <width>511</width>
+      <width>401</width>
       <height>30</height>
      </rect>
     </property>
@@ -140,14 +140,32 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>530</x>
+      <x>420</x>
       <y>801</y>
-      <width>230</width>
+      <width>91</width>
       <height>30</height>
      </rect>
     </property>
     <property name="text">
      <string>Поиск</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>525</x>
+      <y>801</y>
+      <width>231</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Сброс поискового результата</string>
     </property>
    </widget>
   </widget>

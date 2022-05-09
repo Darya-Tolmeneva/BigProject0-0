@@ -45,6 +45,10 @@ class Example(QMainWindow):
         self.lineEdit_3.setText('1')
         self.map = "map"
         self.radioButton.setDown(True)
+        self.pushButton_3.clicked.connect(self.clean_pt)
+
+    def clean_pt(self):
+        self.click()
 
     def find(self):
         if self.lineEdit_4.text():
