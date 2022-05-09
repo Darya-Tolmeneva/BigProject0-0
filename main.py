@@ -33,28 +33,27 @@ class Example(QMainWindow):
         self.setWindowTitle('Отображение карты')
         self.pushButton.clicked.connect(self.click)
 
-
     def keyPressEvent(self, ev):
         k = ev.key()
-        if k == Qt.Key_U:
+        if k == Qt.Key_PageDown:
             try:
-                self.masht = float(self.masht) + 0.1
-                self.getImage()
-                self.pixmap = QPixmap(self.map_file)
-                self.label_4.move(80, 190)
-                self.label_4.setPixmap(self.pixmap)
-            except FloatingPointError:
-                pass
-        elif k == Qt.Key_D:
-            try:
-                self.masht = float(self.masht) - 0.1
-                self.getImage()
-                self.pixmap = QPixmap(self.map_file)
-                self.label_4.move(80, 190)
-                self.label_4.setPixmap(self.pixmap)
-            except FloatingPointError:
-                pass
 
+                self.masht = float(self.masht) + (float(self.masht) * 0.5)
+                self.getImage()
+                self.pixmap = QPixmap(self.map_file)
+                self.label_4.move(80, 190)
+                self.label_4.setPixmap(self.pixmap)
+            except FloatingPointError:
+                pass
+        elif k == Qt.Key_PageUp:
+            try:
+                self.masht = float(self.masht) - (float(self.masht) * 0.5)
+                self.getImage()
+                self.pixmap = QPixmap(self.map_file)
+                self.label_4.move(80, 190)
+                self.label_4.setPixmap(self.pixmap)
+            except FloatingPointError:
+                pass
 
     def click(self):
         self.label_5.setText("")
@@ -75,15 +74,19 @@ class Example(QMainWindow):
         else:
             pass
 
-
     def closeEvent(self, event):
         """При закрытии формы подчищаем за собой"""
         if self.map_file != " ":
             os.remove(self.map_file)
 
 
+def except_hook(cls, exception, traceback):
+    sys.__excepthook__(cls, exception, traceback)
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = Example()
-    ex.show()
+    form = Example()
+    form.show()
+    sys.excepthook = except_hook
     sys.exit(app.exec())
