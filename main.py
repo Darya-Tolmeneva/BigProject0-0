@@ -48,6 +48,7 @@ class Example(QMainWindow):
         self.pushButton_3.clicked.connect(self.clean_pt)
 
     def clean_pt(self):
+        self.plainTextEdit.clear()
         self.click()
 
     def find(self):
@@ -74,6 +75,8 @@ class Example(QMainWindow):
                 self.dolg, self.sh = toponym_coodrinates[0], toponym_coodrinates[1]
                 self.lineEdit.setText(toponym_coodrinates[1])
                 self.lineEdit_2.setText(toponym_coodrinates[0])
+                self.plainTextEdit.insertPlainText(
+                    f'Адрес: {toponym["metaDataProperty"]["GeocoderMetaData"]["Address"]["formatted"]}')
                 self.getImage()
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
