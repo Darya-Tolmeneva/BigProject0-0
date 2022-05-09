@@ -54,6 +54,7 @@ class Example(QMainWindow):
     def find(self):
         if self.lineEdit_4.text():
             if self.lineEdit_3.text():
+                self.plainTextEdit.clear()
                 self.masht = self.lineEdit_3.text()
                 geocoder_api_server = "http://geocode-maps.yandex.ru/1.x/"
                 geocoder_params = {
