@@ -46,6 +46,18 @@ class Example(QMainWindow):
         self.map = "map"
         self.radioButton.setDown(True)
         self.pushButton_3.clicked.connect(self.clean_pt)
+        self.post_index = 'Почтовый индекс не найден'
+        self.checkBox.stateChanged.connect(self.index)
+
+    def index(self):
+        if self.checkBox.isChecked():
+            text = self.plainTextEdit.toPlainText() + f'\nПочтовый индекс: {self.post_index}'
+            self.plainTextEdit.clear()
+            self.plainTextEdit.insertPlainText(text)
+        else:
+            text = self.plainTextEdit.toPlainText().split('Почтовый индекс:')[0]
+            self.plainTextEdit.clear()
+            self.plainTextEdit.insertPlainText(text)
 
     def clean_pt(self):
         self.plainTextEdit.clear()
@@ -78,6 +90,10 @@ class Example(QMainWindow):
                 self.lineEdit_2.setText(toponym_coodrinates[0])
                 self.plainTextEdit.insertPlainText(
                     f'Адрес: {toponym["metaDataProperty"]["GeocoderMetaData"]["Address"]["formatted"]}')
+                try:
+                    self.post_index = toponym["metaDataProperty"]["GeocoderMetaData"]["Address"]["postal_code"]
+                except Exception:
+                    self.post_index = 'Почтовый индекс не найден'
                 self.getImage()
                 self.pixmap = QPixmap(self.map_file)
                 self.label_4.move(80, 190)
