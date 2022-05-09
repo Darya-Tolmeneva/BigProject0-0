@@ -16,7 +16,11 @@ class Example(QMainWindow):
 
     def getImage(self):
         self.label_5.setText("")
-        map_request = f"http://static-maps.yandex.ru/1.x/?ll={self.dolg},{self.sh}&spn={str(self.masht)},{str(self.masht)}&l={self.map}"
+        if not self.need_point:
+            map_request = f"http://static-maps.yandex.ru/1.x/?ll={self.dolg},{self.sh}&spn={str(self.masht)},{str(self.masht)}&l={self.map}"
+        else:
+            map_request = f"http://static-maps.yandex.ru/1.x/?ll={self.dolg},{self.sh}&spn={str(self.masht)},{str(self.masht)}&l={self.map}&pt={self.need_point[0]},{self.need_point[1]},pmwtm1"
+            self.need_point = False
         response = requests.get(map_request)
 
         if not response:
@@ -32,11 +36,49 @@ class Example(QMainWindow):
     def initUI(self):
         self.map_file = " "
         self.map = "-"
+        self.need_point = False
         self.setWindowTitle('Отображение карты')
         self.pushButton.clicked.connect(self.click)
         self.radioButton.toggled.connect(self.onClicked)
         self.radioButton_2.toggled.connect(self.onClicked)
         self.radioButton_3.toggled.connect(self.onClicked)
+        self.pushButton_2.clicked.connect(self.find)
+        self.lineEdit_3.setText('1')
+        self.map = "map"
+        self.radioButton.setDown(True)
+
+    def find(self):
+        if self.lineEdit_4.text():
+            if self.lineEdit_3.text():
+                self.masht = self.lineEdit_3.text()
+                geocoder_api_server = "http://geocode-maps.yandex.ru/1.x/"
+                geocoder_params = {
+                    "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
+                    "geocode": self.lineEdit_4.text(),
+                    "format": "json",
+                }
+                response = requests.get(geocoder_api_server, params=geocoder_params)
+                if not response:
+                    print("Ошибка выполнения запроса:")
+                    print(response)
+                    print("Http статус:", response.status_code, "(", response.reason, ")")
+                    self.label_5.setText("Ой, проверьте данные")
+                json_response = response.json()
+                toponym = json_response["response"]["GeoObjectCollection"][
+                    "featureMember"][0]["GeoObject"]
+                toponym_coodrinates = toponym["Point"]["pos"].split()
+                self.need_point = toponym_coodrinates
+                self.dolg, self.sh = toponym_coodrinates[0], toponym_coodrinates[1]
+                self.lineEdit.setText(toponym_coodrinates[1])
+                self.lineEdit_2.setText(toponym_coodrinates[0])
+                self.getImage()
+                self.pixmap = QPixmap(self.map_file)
+                self.label_4.move(80, 190)
+                self.label_4.setPixmap(self.pixmap)
+            else:
+                self.label_5.setText("Введите масштаб")
+        else:
+            self.label_5.setText("Ой, проверьте данные")
 
     def keyPressEvent(self, ev):
         k = ev.key()
@@ -135,8 +177,13 @@ class Example(QMainWindow):
             os.remove(self.map_file)
 
 
+def except_hook(cls, exception, traceback):
+    sys.__excepthook__(cls, exception, traceback)
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = Example()
-    ex.show()
+    form = Example()
+    form.show()
+    sys.excepthook = except_hook
     sys.exit(app.exec())

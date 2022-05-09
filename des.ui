@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>860</height>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -127,6 +127,29 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLineEdit" name="lineEdit_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>801</y>
+      <width>511</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>801</y>
+      <width>230</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Поиск</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -134,7 +157,7 @@
      <x>0</x>
      <y>0</y>
      <width>770</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
