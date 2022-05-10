@@ -49,6 +49,7 @@ class Example(QMainWindow):
     def find(self):
         if self.lineEdit_4.text():
             if self.lineEdit_3.text():
+                self.need_point = False
                 self.masht = self.lineEdit_3.text()
                 geocoder_api_server = "http://geocode-maps.yandex.ru/1.x/"
                 geocoder_params = {
@@ -147,7 +148,6 @@ class Example(QMainWindow):
             self.sh = self.lineEdit.text()
             self.dolg = self.lineEdit_2.text()
             self.masht = self.lineEdit_3.text()
-            self.need_point = False
             try:
                 self.sh = float(self.sh)
                 self.dolg = float(self.dolg)
