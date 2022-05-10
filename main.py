@@ -48,6 +48,7 @@ class Example(QMainWindow):
         self.pushButton_3.clicked.connect(self.clean_pt)
 
     def clean_pt(self):
+        self.need_point = False
         self.plainTextEdit.clear()
         self.click()
 
