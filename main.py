@@ -60,6 +60,7 @@ class Example(QMainWindow):
             self.plainTextEdit.insertPlainText(text)
 
     def clean_pt(self):
+        self.lineEdit_4.setText('')
         self.need_point = False
         self.plainTextEdit.clear()
         self.click()
