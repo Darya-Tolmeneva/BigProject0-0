@@ -55,11 +55,12 @@ class Example(QMainWindow):
             self.plainTextEdit.clear()
             self.plainTextEdit.insertPlainText(text)
         else:
-            text = self.plainTextEdit.toPlainText().split('Почтовый индекс:')[0]
+            text = self.plainTextEdit.toPlainText().split('\nПочтовый индекс:')[0]
             self.plainTextEdit.clear()
             self.plainTextEdit.insertPlainText(text)
 
     def clean_pt(self):
+        self.need_point = False
         self.plainTextEdit.clear()
         self.click()
 
